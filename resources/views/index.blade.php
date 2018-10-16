@@ -159,7 +159,7 @@
             $(".teamoneinput").on("change",function () {
                 var match_id = $(this).data("matchid");
                 var value = $(this).val();
-                $.post( "/variosoft/public/getFTable",
+                $.post( "{{ config("app.url") }}/getFTable",
                     {
                         match_id : match_id,
                         value : value,
@@ -168,7 +168,7 @@
                     , function( data ) {
                     $( "#f" ).html( data );
                 });
-                $.get( "/variosoft/public/getPTable"
+                $.get( "{{ config("app.url") }}/getPTable"
                     , function( data ) {
                         $( "#p" ).html( data );
                     });
