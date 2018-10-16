@@ -8,6 +8,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta name="csrf-token" content="{{ csrf_token() }}" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
 
         <title>Document</title>
         <style>
@@ -21,8 +22,11 @@
     <section class="container">
         <div class="row jumbotron mt-5">
             <a href="{{ route('allMatch') }}" class="btn btn-success">Play All</a>
-
+            @if($current_week != 6)
             <a href="{{ route('match') }}" class="btn btn-success" style="margin-left: 80%">Next Week</a>
+                @else
+                <a href="{{ route('match') }}" class="btn btn-success" style="margin-left: 80%">New Game</a>
+            @endif
         </div>
         <div id="r">
             <div class="jumbotron">
@@ -101,7 +105,7 @@
                             <table class="table table-bordered">
                                 <thead>
                                 <tr>
-                                    <th colspan="4" class="text-center">Probability</th>
+                                    <th colspan="4" class="text-center">Probability Of Champion</th>
 
                                 </tr>
                                 </thead>

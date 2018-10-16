@@ -14,6 +14,11 @@ class HomeController extends Controller
     //
     public  function index()
     {
+        Charts::database(User::all(), 'bar', 'highcharts')
+            ->setElementLabel("Total")
+            ->setDimensions(1000, 500)
+            ->setResponsive(false)
+            ->groupByDay();
 
         //dd(Team::find(1)->total_win);
 
