@@ -16,6 +16,7 @@
                 max-width: 20px;
             }
         </style>
+        {!! Charts::styles() !!}
     </head>
     <body>
 
@@ -28,7 +29,7 @@
                 <a href="{{ route('match') }}" class="btn btn-success" style="margin-left: 80%">New Game</a>
             @endif
         </div>
-        <div id="r">
+        <div id="app">
             <div class="jumbotron">
                 <div class="row">
 
@@ -126,6 +127,11 @@
                                 @endif
                                 </tbody>
                             </table>
+                            <div class="row">
+                                @if($current_week == 4 || $current_week == 5)
+                                    {!! $chart->html()  !!}
+                                    @endif
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -135,11 +141,10 @@
 
 
     </section>
-    <script
-            src="https://code.jquery.com/jquery-3.3.1.js"
-            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    {!! Charts::scripts() !!}
+    @if($current_week == 4 || $current_week == 5)
+    {!! $chart->script() !!}
+    @endif
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script type="text/javascript">
         $.ajaxSetup({
@@ -163,12 +168,15 @@
                     , function( data ) {
                     $( "#f" ).html( data );
                 });
-
+                $.get( "/variosoft/public/getPTable"
+                    , function( data ) {
+                        $( "#p" ).html( data );
+                    });
             });
             $(".teamtwoinput").on("change",function () {
                 var match_id = $(this).data("matchid");
                 var value = $(this).val();
-                $.post( "/variosoft/public/getFTable",
+                $.post( "{{ config("app.url") }}/getFTable",
                     {
                         match_id : match_id,
                         value : value,
@@ -177,9 +185,14 @@
                     , function( data ) {
                         $( "#f" ).html( data );
                     });
+                $.get( "{{ config("app.url") }}/getPTable"
+                    , function( data ) {
+                        $( "#p" ).html( data );
+                    });
 
             });
         })
     </script>
+
     </body>
 </html>

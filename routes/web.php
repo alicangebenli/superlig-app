@@ -15,3 +15,4 @@ Route::get('/','HomeController@index');
 Route::get('/match','HomeController@match')->name('match');
 Route::get('/allMatch','HomeController@allMatch')->name('allMatch');
 Route::post('/getFTable','HomeController@getFTable')->name('getFTable');
+Route::get('/getPTable','HomeController@getPTable')->name('getPTable');
