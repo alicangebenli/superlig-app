@@ -1,3 +1,4 @@
+Laravel 5.4 - Jquery 
 ### Installation
 Composer Update
 ```sh
